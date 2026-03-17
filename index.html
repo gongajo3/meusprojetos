@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>José Gonga | Portfólio</title>
+  <!-- Bootstrap Icons CDN (substitui Font Awesome) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Fonte Inter (opcional, para harmonia) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background: #f0f3f8;
+      color: #1e293b;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* scroll personalizado */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #e9eef3; }
+    ::-webkit-scrollbar-thumb { background: #2563eb; border-radius: 10px; }
+
+    /* cabeçalho com gradiente e imagem integrada */
+    .hero {
+      background: linear-gradient(135deg, #0c1b33 0%, #1e3a6b 100%);
+      color: white;
+      padding: 2.5rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: " ";
+      position: absolute;
+      top: -20%;
+      right: -5%;
+      width: 280px;
+      height: 280px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .hero-text {
+      flex: 2 1 300px;
+    }
+
+    .hero-text h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(to right, #fff, #cfdeff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-text .tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 1.1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      margin: 1rem 0 0.8rem;
+    }
+
+    .hero-text p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      max-width: 600px;
+    }
+
+    .hero-image {
+      flex: 1 1 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .image-frame {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #a0c0ff, #2563eb);
+      padding: 5px;
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid white;
+      background: #b1c9ff; /* fallback */
+      display: block;
+    }
+
+    /* fallback caso a imagem não carregue — exibe as iniciais */
+    .image-frame img[alt] {
+      background: #2550a0;
+      font-size: 3rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+    }
+
+    /* navegação flutuante / sticky */
+    .navbar {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      padding: 0.8rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav-links {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: #1e293b;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.3rem 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+      font-size: 1.05rem;
+      letter-spacing: 0.3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links a:hover {
+      border-bottom-color: #2563eb;
+      color: #0f2b50;
+    }
+
+    /* sections gerais */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-title i {
+      background: #2563eb;
+      color: white;
+      padding: 0.7rem;
+      border-radius: 14px;
+      font-size: 1.6rem;
+      box-shadow: 0 8px 16px -6px #2563eb80;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 28px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 15px 30px -12px rgba(0, 20, 40, 0.15);
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      background: white;
+      box-shadow: 0 30px 40px -15px #1e293b40;
+      border-color: white;
+    }
+
+    .card h3 {
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #0c1b33;
+    }
+
+    .badge {
+      background: #e0e9ff;
+      color: #1e3a6b;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .competencia-item {
+      background: #f8fafd;
+      padding: 0.8rem 1.2rem;
+      border-radius: 50px;
+      margin: 0.6rem 0;
+      display: inline-block;
+      border: 1px solid #dbe4f0;
+      font-weight: 500;
+    }
+
+    .btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 6px 14px #2563eb60;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn i { font-size: 1.1rem; }
+
+    .btn:hover {
+      background: #1a47b3;
+      box-shadow: 0 10px 20px -5px #1e4dcf;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #2563eb;
+      color: #2563eb;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: #eef4ff;
+    }
+
+    /* contactos elegantes */
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: #f4f9ff;
+      padding: 1rem 2rem;
+      border-radius: 70px;
+      border: 1px solid #d6e4ff;
+    }
+
+    .contact-item i {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: #2563eb;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 1.2rem;
+    }
+
+    /* projetos com ações */
+    .project-actions {
+      margin-top: 1.8rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* rodapé moderno */
+    .footer {
+      background: #0e1f38;
+      color: #aac3e0;
+      padding: 2rem;
+      text-align: center;
+      border-top: 3px solid #2563eb;
+    }
+
+    .footer p {
+      max-width: 600px;
+      margin: 0.3rem auto;
+    }
+
+    .footer .assinatura {
+      color: white;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* responsividade extra */
+    @media (max-width: 700px) {
+      .hero-text h1 { font-size: 2.5rem; }
+      .hero-container { flex-direction: column-reverse; text-align: center; }
+      .image-frame { width: 160px; height: 160px; }
+      .nav-links { gap: 1rem; }
+      .section-title { font-size: 1.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- secção hero com a tua imagem integrada -->
+  <div class="hero">
+    <div class="hero-container">
+      <div class="hero-text">
+        <span class="tag"><i class="bi bi-terminal-fill" style="margin-right: 8px;"></i> Gestão de Sistemas Informáticos</span>
+        <h1>José Gonga</h1>
+        <p>Motivado por tecnologia, sistemas de informação e soluções digitais com impacto.</p>
+        <div style="margin-top: 1.8rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="#contactos" class="btn" style="background: white; color: #1e3a6b; box-shadow: 0 8px 18px #00000030;"><i class="bi bi-send-fill"></i> Contactar</a>
+          <a href="#projetos" class="btn btn-outline" style="background: transparent; border-color: white; color: white;"> <i class="bi bi-code-slash"></i> Projectos</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="image-frame">
+          <!-- A tua imagem (placeholder com as iniciais) — substituir pelo caminho real -->
+          <img src="./IMG_E4511.JPG width='200' height='200' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%232563eb'/%3E%3Ctext x='50' y='67' font-size='40' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3EJG%3C/text%3E%3C/svg%3E"
+               alt="José Gonga"
+               title="José Gonga">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- barra de navegação sticky -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="#sobre"><i class="bi bi-person-fill"></i> Sobre</a>
+      <a href="#formacao"><i class="bi bi-mortarboard-fill"></i> Formação</a>
+      <a href="#competencias"><i class="bi bi-gear-fill"></i> Competências</a>
+      <a href="#projetos"><i class="bi bi-folder-fill"></i> Projectos</a>
+      <a href="#contactos"><i class="bi bi-envelope-fill"></i> Contactos</a>
+    </div>
+  </nav>
+
+  <!-- Sobre -->
+  <section id="sobre" class="section">
+    <div class="section-title">
+      <i class="bi bi-robot"></i>
+      <span>Sobre mim</span>
+    </div>
+    <div class="card" style="padding: 2.5rem; border-radius: 40px;">
+      <p style="font-size: 1.25rem; color: #1e293b; font-weight: 400;">Profissional motivado, com interesse profundo em tecnologia, sistemas de informação e desenvolvimento de soluções digitais. Experiência académica na elaboração de trabalhos científicos, projetos de sistemas e documentação técnica. Procuro unir pensamento lógico e criatividade para resolver problemas reais.</p>
+      <div style="display: flex; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap;">
+        <span class="competencia-item"><i class="bi bi-check-circle-fill" style="color:#2563eb;"></i> Trabalhos científicos (APA7)</span>
+        <span class="competencia-item"><i class="bi bi-check-circle-fill" style="color:#2563eb;"></i> Fluxogramas & algoritmos</span>
+        <span class="competencia-item"><i class="bi bi-check-circle-fill" style="color:#2563eb;"></i> HTML/CSS/JS básico</span>
+        <span class="competencia-item"><i class="bi bi-check-circle-fill" style="color:#2563eb;"></i> Microsoft(Word, Excel e Power Point)</span>
+        <span class="competencia-item"><i class="bi bi-check-circle-fill" style="color:#2563eb;"></i> Conhecimentos básicos de Redes de Computadores</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formação Académica e estágio -->
+  <section id="formacao" class="section">
+    <div class="section-title">
+      <i class="bi bi-bank"></i>
+      <span>Formação & Experiência</span>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="badge">2025 – 2026</div>
+        <h3>📘 Gestão de Sistemas Informáticos</h3>
+        <p style="margin: 0.5rem 0 1rem;"><i class="bi bi-geo-alt-fill" style="color:#2563eb;"></i> Instituto Politécnico Industrial de Luanda</p>
+        <p>Curso focado em infraestrutura tecnológica, análise de sistemas e desenvolvimento de software.</p>
+      </div>
+      <div class="card">
+        <div class="badge">Estágio 2025–2026</div>
+        <h3>💼 TICNES LDA</h3>
+        <p style="margin-bottom: 1rem;"><i class="bi bi-briefcase-fill"></i> Estagiário em sistemas</p>
+        <p>Atividades de suporte, documentação de processos e auxílio no desenvolvimento de pequenos módulos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Competências com estilo de tags (usando Bootstrap Icons) -->
+  <section id="competencias" class="section">
+    <div class="section-title">
+      <i class="bi bi-gear-wide-connected"></i>
+      <span>Competências técnicas</span>
+    </div>
+    <div class="card" style="border-radius: 40px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 0.8rem;">
+        <span class="competencia-item"><i class="bi bi-filetype-html"></i> HTML5 & CSS3</span>
+        <span class="competencia-item"><i class="bi bi-filetype-js"></i> JavaScript (básico)</span>
+        <span class="competencia-item"><i class="bi bi-file-earmark-text-fill"></i> Normalização APA 7ª</span>
+        <span class="competencia-item"><i class="bi bi-diagram-3-fill"></i> Fluxogramas / UML</span>
+        <span class="competencia-item"><i class="bi bi-file-earmark-excel-fill"></i> Word • Excel • PowerPoint</span>
+        <span class="competencia-item"><i class="bi bi-brightness-alt-high-fill"></i> Pensamento lógico</span>
+        <span class="competencia-item"><i class="bi bi-journal-text"></i> Documentação técnica</span>
+        <span class="competencia-item"><i class="bi bi-terminal-fill"></i> Algoritmos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projectos interativos e dinâmicos (botões com acções reais) -->
+  <section id="projetos" class="section">
+    <div class="section-title">
+      <i class="bi bi-git"></i>
+      <span>Projectos em destaque</span>
+    </div>
+    <div class="card-grid">
+      <!-- cartão 1 -->
+      <div class="card">
+        <span class="badge">em desenvolvimento</span>
+        <h3>📢 Sistema Denúncias</h3>
+        <p>Estrutura completa com área de utilizador e administrador, incluindo fluxogramas, requisitos e documentação académica.</p>
+        <div class="project-actions">
+          <button class="btn" onclick="mostrarDetalhes('denuncias')" style="padding: 0.6rem 1.5rem;"><i class="bi bi-info-circle-fill"></i> Detalhes</button>
+          <button class="btn-outline btn" onclick="simularAcesso('prototipo')" style="padding: 0.6rem 1.5rem;"><i class="bi bi-eye-fill"></i> Prévia</button>
+        </div>
+      </div>
+      <!-- cartão 2 - Calculadora funcional (exemplo real com alerta e link) -->
+      <div class="card">
+        <span class="badge">HTML/CSS/JS</span>
+        <h3>🧮 Calculadora Web</h3>
+        <p>Calculadora para operações primárias com interface limpa e responsiva.</p>
+        <div class="project-actions">
+          <!-- simulamos com javascript (podes substituir pelos links certos) -->
+          <a href="./Calculadora.html"><button class="btn" style="padding: 0.6rem 1.5rem;"><i class="bi bi-box-arrow-up-right"></i> Abrir calculadora</button></a>
+          <a><button class="btn-outline btn" style="padding: 0.6rem 1.5rem;"><i class="bi bi-code-square"></i> Código</button></a>
+        </div>
+      </div>
+      <!-- cartão 3 - Relógio dinâmico -->
+      <div class="card">
+        <span class="badge">interativo</span>
+        <h3>⏰ Relógio Web</h3>
+        <p>Relógio digital interativo com atualização em tempo real e estilo moderno.</p>
+        <div class="project-actions">
+          <a href="./Relógio.html"><button class="btn"  style="padding: 0.6rem 1.5rem;"><i class="bi bi-clock-fill"></i> Ver relógio</button></a>
+          <button class="btn-outline btn"  style="padding: 0.6rem 1.5rem;"><i class="bi bi-info-circle"></i> Detalhes</button>
+        </div>
+      </div>
+    </div>
+    <!-- extra: demonstração de relógio via alert (feedback) -->
+  </section>
+
+  <!-- Contactos refinados (Bootstrap Icons) -->
+  <section id="contactos" class="section">
+    <div class="section-title">
+      <i class="bi bi-person-vcard-fill"></i>
+      <span>Contactos</span>
+    </div>
+    <div class="contact-list">
+      <div class="contact-item"><i class="bi bi-envelope-fill"></i> <span style="font-weight: 500;">gongajose326@gmail.com</span></div>
+      <div class="contact-item"><i class="bi bi-telephone-fill"></i> <span>+244 942 295 255</span></div>
+      <div class="contact-item"><i class="bi bi-linkedin"></i> <span>Jose Gonga</span></div>
+      <div class="contact-item"><i class="bi bi-github"></i> <span>gongajo3</span></div>
+    </div>
+  </section>
+
+  <!-- rodapé -->
+  <footer class="footer">
+    <p class="assinatura">© 2026 José Gonga — Todos os direitos reservados</p>
+    <h6 style="font-size: 0.95rem;">Desenvolvido | José Gonga</h6>
+    <p style="margin-top: 0.8rem; font-size: 0.9rem;"><i class="bi bi-laptop"></i> Gestão de Sistemas Informáticos</p>
+  </footer>
+
+  <!-- Scripts dinâmicos e interatividade profissional -->
+  <script>
+    // Funções para simular ações dos projetos (feedback elegante)
+  
+
+    function simularAcesso(tipo) {
+      if (tipo === 'prototipo') {
+        alert("🔒 Protótipo do sistema de denúncias disponível em ambiente académico. Em breve online.");
+      }
+    }
+
+    
+
+   
+
+    // função para o botão antigo de "ver detalhes" (presente no primeiro card opcional)
+    function mostrarMensagem() {
+      alert("Projeto académico ainda está sendo desenvolvido.");
+    }
+
+    // pequeno efeito: mudar ícone do navbar ao passar
+    console.log("Portfólio José Gonga - carregado com Bootstrap Icons.");
+  </script>
+  <!-- (os botões que chamam window.open mantêm fallback com alerta) -->
+</body>
+</html>
